@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using Tasklist.Models;
-
 namespace Tasklist.Background
 {
     public class InMemoryProcessRepository : IProcessRepository

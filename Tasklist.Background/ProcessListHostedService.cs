@@ -9,8 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using Tasklist.Models;
-
 namespace Tasklist.Background
 {
     public class ProcessListHostedService : BackgroundService

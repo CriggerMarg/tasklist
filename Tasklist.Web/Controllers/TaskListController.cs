@@ -3,8 +3,8 @@ using System.Linq;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+
 using Tasklist.Background;
-using Tasklist.Models;
 
 namespace Tasklist.Web.Controllers
 {

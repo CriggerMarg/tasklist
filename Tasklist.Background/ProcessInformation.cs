@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Tasklist.Models
+namespace Tasklist.Background
 {
     public class ProcessInformation
     {
