@@ -1,5 +1,21 @@
 import React, { Component } from 'react';
 import DataTable from 'react-data-table-component';
+
+const columns = [
+  {
+    name: 'Name',
+    selector: 'name',
+    width: 200,
+    sortable: true,
+  },
+  {
+    name: 'CPU',
+    selector: 'cpuLoad',
+    width: 100,
+    sortable: true,
+  },
+];
+
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -28,23 +44,10 @@ export class Home extends Component {
         }
       );
   }
+
   render() {
     const { error, isLoaded, items } = this.state;
 
-    const columns = [
-      {
-        name: 'Name',
-        selector: 'name',
-        width: 200,
-        sortable: true,
-      },
-      {
-        name: 'CPU',
-        selector: 'cpuLoad',
-        width: 100,
-        sortable: true,
-      },
-    ];
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -56,6 +59,7 @@ export class Home extends Component {
             title="Task manager"
             columns={columns}
             data={items}
+            keyField="id"
             defaultSortAsc={false}
             defaultSortField="cpuload"
           />
