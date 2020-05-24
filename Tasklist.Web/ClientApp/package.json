@@ -1,5 +1,5 @@
 {
-  "name": "webapplication1",
+  "name": "tasklist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +17,8 @@
     "react-scripts": "^3.4.0",
     "reactstrap": "^8.4.1",
     "rimraf": "^2.6.2",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "websocket": "^1.0.31"
   },
   "devDependencies": {
     "ajv": "^6.9.1",

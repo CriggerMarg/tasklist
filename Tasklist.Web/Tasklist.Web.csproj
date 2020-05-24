@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tasklist.Background\Tasklist.Background.csproj" />
+    <ProjectReference Include="..\Tasklist.Middleware\Tasklist.Middleware.csproj" />
   </ItemGroup>
 
 

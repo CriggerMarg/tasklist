@@ -46,7 +46,7 @@ namespace Tasklist.Background
             {
                 try
                 {
-                    _processRepository.ProcessInformation = ReadProcessInfo();
+                    await _processRepository.SetProcessInfo(ReadProcessInfo());
 
                     await Task.Delay(TimeSpan.FromMilliseconds(_refreshRateInMS), stoppingToken);
                 }
@@ -94,18 +94,24 @@ namespace Tasklist.Background
                     }
                     var els = entry.Trim().Split(' ');
                     var name = els.First();
+                    if (name == "_total")
+                    {
 
+                    }
                     if (name == "_total" || name == "idle" || name == "system")
                     {
                         continue;
                     }
                     float cpu = 0;
                     float.TryParse(els.Last(), out cpu);
-                    list.Add(new ProcessInformation()
+                    if (cpu > 0)
                     {
-                        Name = els.First(),
-                        CPULoad = cpu
-                    });
+                        list.Add(new ProcessInformation()
+                        {
+                            Name = els.First(),
+                            CPULoad = cpu
+                        });
+                    }
                 }
             }
             catch (Exception e)

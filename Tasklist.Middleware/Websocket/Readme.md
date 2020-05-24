@@ -1,0 +1,1 @@
+﻿Idea taken from https://radu-matei.com/blog/aspnet-core-websockets-middleware/
