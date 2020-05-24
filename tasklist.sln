@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasklist.Web", "Tasklist.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tasklist.Background", "Tasklist.Background\Tasklist.Background.csproj", "{B920D6E1-81AD-4707-8B1D-34C76623F098}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasklist.Middleware", "Tasklist.Middleware\Tasklist.Middleware.csproj", "{9D92502B-A777-4841-AE53-A825E8F6FE36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B920D6E1-81AD-4707-8B1D-34C76623F098}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B920D6E1-81AD-4707-8B1D-34C76623F098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B920D6E1-81AD-4707-8B1D-34C76623F098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D92502B-A777-4841-AE53-A825E8F6FE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D92502B-A777-4841-AE53-A825E8F6FE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D92502B-A777-4841-AE53-A825E8F6FE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D92502B-A777-4841-AE53-A825E8F6FE36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

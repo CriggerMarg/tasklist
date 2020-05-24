@@ -7,8 +7,7 @@ export class Layout extends Component {
 
   render() {
     return (
-      <div>
-        <NavMenu />
+      <div style={{ marginTop: 48, marginLeft: 48 }}>
         <Container>{this.props.children}</Container>
       </div>
     );

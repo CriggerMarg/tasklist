@@ -30,7 +30,7 @@ export class NavMenu extends Component {
         >
           <Container>
             <NavbarBrand tag={Link} to="/">
-              WebApplication1
+              Tasklist
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           </Container>

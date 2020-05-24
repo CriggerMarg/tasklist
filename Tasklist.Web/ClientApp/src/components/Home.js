@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import DataTable from 'react-data-table-component';
+import { w3cwebsocket as WebSocket } from 'websocket';
 
 const columns = [
   {
+    name: 'id',
+    selector: 'id',
+    omit: true,
+  },
+  {
     name: 'Name',
     selector: 'name',
-    width: 200,
     sortable: true,
   },
   {
     name: 'CPU',
     selector: 'cpuLoad',
-    width: 100,
     sortable: true,
+    right: true,
   },
 ];
 
@@ -24,6 +29,9 @@ export class Home extends Component {
       loading: true,
     };
   }
+
+  taskListSocket = new WebSocket('wss://localhost:44336/ws-cpu-all');
+  lowSysSocket = new WebSocket('wss://localhost:44336/ws-low-sys');
   componentDidMount() {
     fetch('https://localhost:44336/tasklist')
       .then((res) => res.json())
@@ -43,11 +51,29 @@ export class Home extends Component {
           });
         }
       );
+
+    this.taskListSocket.onmessage = (evt) => {
+      // listen to data sent from the websocket server
+      var data = JSON.parse(evt.data);
+      this.setState({ items: data });
+    };
+    this.lowSysSocket.onmessage = (evt) => {
+      // listen to data sent from the websocket server
+      var flags = JSON.parse(evt.data);
+      this.setState({
+        highCpu: flags.highCpu,
+        lowMemory: flags.lowMemory,
+      });
+    };
   }
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, items, highCpu, lowMemory } = this.state;
 
+    const errorStyle = {
+      fontColor: 'red',
+      color: 'red',
+    };
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -55,13 +81,30 @@ export class Home extends Component {
     } else {
       return (
         <div>
+          <div style={{ paddingLeft: 18 }}>
+            <h4>
+              CPU level is&nbsp;
+              <span className={highCpu ? 'warning' : 'ok'}>
+                {highCpu ? 'high' : 'ok'}
+              </span>
+            </h4>
+          </div>
+          <div style={{ paddingLeft: 18 }}>
+            <h4>
+              Memory level is&nbsp;
+              <span className={lowMemory ? 'warning' : 'ok'}>
+                {lowMemory ? 'low' : 'ok'}
+              </span>
+            </h4>
+          </div>
+          <hr />
           <DataTable
             title="Task manager"
             columns={columns}
             data={items}
             keyField="id"
             defaultSortAsc={false}
-            defaultSortField="cpuload"
+            defaultSortField="cpuLoad"
           />
         </div>
       );
