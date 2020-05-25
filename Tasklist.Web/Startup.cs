@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net.WebSockets;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Tasklist.Background;
+using Tasklist.Background.HostedService;
+using Tasklist.Middleware;
 using Tasklist.Middleware.Websocket;
 
 namespace Tasklist.Web

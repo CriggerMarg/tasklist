@@ -1,30 +1,28 @@
 ﻿using System;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
-
 using Tasklist.Background;
 using Tasklist.Middleware.Websocket;
 
 namespace Tasklist.Web
 {
-
     public class ProcessListWebSocket : WebSocketHandler
     {
         private readonly IProcessRepository _processRepository;
         private CancellationTokenSource _stoppingToken;
-        private readonly int _refreshRateInMS;
-        public ProcessListWebSocket(WebSocketConnectionManager connectionManager, IProcessRepository processRepository, IConfiguration configuration) : base(connectionManager)
+        private readonly int _refreshRate;
+        public ProcessListWebSocket(WebSocketConnectionManager connectionManager, IProcessRepository processRepository, IConfiguration configuration)
+            : base(connectionManager)
         {
             _processRepository = processRepository;
-            int.TryParse(configuration["TasklistRefreshRateMS"], out _refreshRateInMS);
-            if (_refreshRateInMS == 0)
+            int.TryParse(configuration["TasklistRefreshRateMS"], out _refreshRate);
+            if (_refreshRate == 0)
             {
-                _refreshRateInMS = 50;
+                _refreshRate = 50;
             }
         }
 
@@ -34,6 +32,7 @@ namespace Tasklist.Web
             _stoppingToken = new CancellationTokenSource();
             await Task.Run(async () =>
              {
+                 // sending messages until asked to stop
                  while (!_stoppingToken.IsCancellationRequested)
                  {
                      if (_processRepository.ProcessInformation.Any())
@@ -45,7 +44,7 @@ namespace Tasklist.Web
                              }));
                      }
 
-                     await Task.Delay(TimeSpan.FromMilliseconds(_refreshRateInMS));
+                     await Task.Delay(TimeSpan.FromMilliseconds(_refreshRate));
                  }
              }, _stoppingToken.Token);
         }

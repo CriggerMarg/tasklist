@@ -2,8 +2,12 @@
 
 namespace Tasklist.Background
 {
+    /// <summary>
+    /// Structure to pass system info
+    /// </summary>
     public struct SysInfo : IEquatable<SysInfo>
     {
+        
         public bool HighCpu { get; set; }
         public bool LowMemory { get; set; }
 

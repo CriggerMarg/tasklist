@@ -1,17 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Tasklist.Background
+﻿namespace Tasklist.Background
 {
+    /// <summary>
+    /// Holds information about process. Provides process name with it's cpu load
+    /// </summary>
     public class ProcessInformation
     {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public float CPULoad { get; set; }
-
-        public override string ToString()
+        public ProcessInformation(string name, float cpuLoad)
         {
-            return $"{Name} {CPULoad}";
+            Name = name;
+            CPULoad = cpuLoad;
         }
+
+        public string Name { get; }
+        public float CPULoad { get; }
     }
 }

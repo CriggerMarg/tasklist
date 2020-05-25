@@ -32,15 +32,23 @@ export class Home extends Component {
 
   taskListSocket = new WebSocket('wss://localhost:44336/ws-cpu-all');
   lowSysSocket = new WebSocket('wss://localhost:44336/ws-low-sys');
+
+  updateItems(items) {
+    let i = 0;
+    items.forEach((element) => {
+      element.id = i++;
+    });
+    this.setState({
+      isLoaded: true,
+      items: items,
+    });
+  }
   componentDidMount() {
     fetch('https://localhost:44336/tasklist')
       .then((res) => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result,
-          });
+          this.updateItems(result);
         },
         // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
         // чтобы не перехватывать исключения из ошибок в самих компонентах.
@@ -55,7 +63,7 @@ export class Home extends Component {
     this.taskListSocket.onmessage = (evt) => {
       // listen to data sent from the websocket server
       var data = JSON.parse(evt.data);
-      this.setState({ items: data });
+      this.updateItems(data);
     };
     this.lowSysSocket.onmessage = (evt) => {
       // listen to data sent from the websocket server

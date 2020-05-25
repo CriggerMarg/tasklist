@@ -3,7 +3,6 @@ using System.Net.WebSockets;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Tasklist.Background;
 using Tasklist.Middleware.Websocket;
 
@@ -32,16 +31,14 @@ namespace Tasklist.Web
                     if (!info.Equals(lastSent))
                     {
                         lastSent = info;
-                        await SendMessageAsync(socket, JsonSerializer.Serialize(info,
-                            new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+                        await SendMessageAsync(socket,
+                            JsonSerializer.Serialize(info,
+                                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
                     }
-
                     await Task.Delay(TimeSpan.FromMilliseconds(100));
                 }
             }, _stoppingToken.Token);
         }
-
-
 
         public override Task OnDisconnected(WebSocket socket)
         {
